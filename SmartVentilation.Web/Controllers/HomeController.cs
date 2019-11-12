@@ -23,15 +23,47 @@ namespace SmartVentilation.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public JsonResult GetEvents(double start, double end)
         {
-            return View();
+            //var userName = Session["UserName"] as string;
+            //if (string.IsNullOrEmpty(userName))
+            //{
+            //    return null;
+            //}
+ 
+            var fromDate = ConvertFromUnixTimestamp(start);
+            var toDate = ConvertFromUnixTimestamp(end);
+ 
+            //var rep = Resolver.Resolve<IEventRepository>();
+            //var events = rep.ListEventsForUser(userName, fromDate, toDate);
+ 
+            var eventList = new object[]
+            {
+                new {
+                    id = 1,
+                    title = "Test",
+                    start = DateTime.Now.AddHours(-2).ToString("s"),
+                    end = DateTime.Now.ToString("s"),
+                    allDay = false
+                }
+            };
+                
+ 
+            //var rows = eventList.ToArray();
+            return Json(eventList);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private static DateTime ConvertFromUnixTimestamp(double timestamp)
+        {
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timestamp);
         }
     }
 }

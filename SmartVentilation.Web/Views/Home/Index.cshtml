@@ -3,6 +3,22 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Ventilation Schedule</h1>
+    <div id="calendar"></div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            theme: true,
+            header: {
+                left: '',
+                center: '',
+                right: ''
+            },
+            defaultView: 'agendaDay',
+            editable: false,
+            events: "/Home/GetEvents/"
+        });
+    });
+</script>
