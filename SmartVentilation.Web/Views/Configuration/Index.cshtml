@@ -1,4 +1,4 @@
-﻿@model SmartValidation.Shared.Models.ApplicationSettings
+﻿@model SmartValidation.Shared.Models.ApplicationConfig
 
 @{
     ViewData["Title"] = "Konfigurace";
@@ -15,14 +15,14 @@
     <div class="card">
         <div class="card-header">Typy událostí</div>
         <div class="card-body">
-            <table id="event-type-table">
+            <table id="event-type-table" class="table">
                 <thead>
                     <tr>
-                        <th>Kód</th>
-                        <th>Název</th>
-                        <th>Náběh (min)</th>
-                        <th>Doběh (min)</th>
-                        <th>Barva</th>
+                        <th scope="col">Kód</th>
+                        <th scope="col">Název</th>
+                        <th scope="col">Náběh (min)</th>
+                        <th scope="col">Doběh (min)</th>
+                        <th scope="col">Barva</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@
                     @foreach (var eventType in Model.EventTypes)
                     {
 
-                        <tr data-row="0">
+                        <tr>
                             <td>@Html.TextBox($"EventTypes[{index}].Code", eventType.Code)</td>
                             <td>@Html.TextBox($"EventTypes[{index}].Name", eventType.Name)</td>
                             <td>@Html.TextBox($"EventTypes[{index}].VentilationStartUpInMinutes", eventType.VentilationStartUpInMinutes, new { @type = "number" })</td>
@@ -66,11 +66,7 @@
 
 
 <script>
-    $('select.color-picker').simplecolorpicker({
-        picker: true
-    }).on('change', function () {
-        //$(this).parent[].css('background-color', $('select[name="color-picker"]').val());
-    });
+    $('select.color-picker').simplecolorpicker({ picker: true });
 
     $('#add-event-type').click(function() {
         const newRowIndex = $('#event-type-table > tbody > tr').length;

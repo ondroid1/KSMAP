@@ -7,6 +7,7 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace SmartVentilation.ConsoleApp
@@ -14,6 +15,13 @@ namespace SmartVentilation.ConsoleApp
     [DisallowConcurrentExecution]
     public class CalendarReadingJob : IJob
     {
+        private readonly ILogger<CalendarReadingJob> _logger;
+
+        public CalendarReadingJob(ILogger<CalendarReadingJob> logger)
+        {
+            _logger = logger;
+        }
+
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/calendar-dotnet-quickstart.json
         static string[] Scopes = { CalendarService.Scope.CalendarReadonly };
@@ -24,6 +32,7 @@ namespace SmartVentilation.ConsoleApp
         /// </summary>
         public Task Execute(IJobExecutionContext context)
         {
+            _logger.LogDebug(20, "Doing hard work!");
             Console.WriteLine($"{DateTime.Now} - Calendar read");
             ReadFutureCalendarItems();
             return Task.CompletedTask;

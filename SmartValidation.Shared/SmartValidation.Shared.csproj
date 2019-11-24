@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Models\ApplicationConfig.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

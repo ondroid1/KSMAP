@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.IO;
-using System.Runtime.Loader;
-using System.Threading;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Quartz;
 using Quartz.Impl;
-using Quartz.Impl.Triggers;
+using SmartValidation.Shared.Models;
+using SmartVentilation.ConsoleApp.Config;
 
 namespace SmartVentilation.ConsoleApp
 {
@@ -14,17 +11,27 @@ namespace SmartVentilation.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Job.InitializeJobs();
+            var applicationConfig = GetApplicationConfig();
+
+            Job.InitializeJobs(applicationConfig);
 
             Console.WriteLine("Tasks started!");
 
             Console.ReadLine();
         }
+
+        private static ApplicationConfig GetApplicationConfig()
+        {
+            string configurationFilePath = ConfigurationManager.AppSetting["ConfigurationFilePath"];
+
+            var json = System.IO.File.ReadAllText(configurationFilePath);
+            return JsonConvert.DeserializeObject<ApplicationConfig>(json);
+        }
     }
 
     public static class Job
     {
-        public static async void InitializeJobs()
+        public static async void InitializeJobs(ApplicationConfig applicationConfig)
         {
             var scheduler = await new StdSchedulerFactory().GetScheduler();
             await scheduler.Start();
@@ -32,10 +39,12 @@ namespace SmartVentilation.ConsoleApp
             var userEmailsJob = JobBuilder.Create<CalendarReadingJob>()
                 .WithIdentity("CalendarReadingJob")
                 .Build();
+            var cronSchedule = $"0 0/{applicationConfig.RefreshIntervalInMinutes} * * * ?";
+            Console.WriteLine($"Cron schedule: {cronSchedule}");
             var userEmailsTrigger = TriggerBuilder.Create()
                 .WithIdentity("CalendarReadingJobCron")
                 .StartNow()
-                .WithCronSchedule("* * * ? * *")
+                .WithCronSchedule(cronSchedule)
                 .Build();
 
             var result = await scheduler.ScheduleJob(userEmailsJob, userEmailsTrigger);

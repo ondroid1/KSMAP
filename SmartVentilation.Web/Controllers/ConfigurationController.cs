@@ -12,27 +12,18 @@ namespace SmartVentilation.Web.Controllers
         public IActionResult Index()
         {
             var json = System.IO.File.ReadAllText("configuration.json");
-            var model = JsonConvert.DeserializeObject<ApplicationSettings>(json);
+            var model = JsonConvert.DeserializeObject<ApplicationConfig>(json);
             ViewBag.Colors = GetColorOptions();
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Index(ApplicationSettings model)
+        public IActionResult Index(ApplicationConfig model)
         {
             if (TryValidateModel(model))
             {
-                model.EventTypes.Add(new EventType
-                {
-                    Code = "OS",
-                    Name = "NNN",
-                    VentilationStartUpInMinutes = 10,
-                    VentilationRunOutInMinutes = 45,
-                    Color = "#fbd75b"
-                });
-
-                var json = JsonConvert.SerializeObject(model);
+                var json = JsonConvert.SerializeObject(model, Formatting.Indented);
                 System.IO.File.WriteAllText("configuration.json", json);
             }
 
