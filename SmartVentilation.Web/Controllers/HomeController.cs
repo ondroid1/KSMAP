@@ -41,10 +41,22 @@ namespace SmartVentilation.Web.Controllers
             {
                 new {
                     id = 1,
-                    title = "Test",
+                    title = "Náběh",
+                    start = DateTime.Now.AddHours(-2.5).ToString("s"),
+                    end = DateTime.Now.AddHours(-2).ToString("s"),
+                    allDay = false,
+                    backgroundColor = "lightgreen",
+                    borderColor = "lightgreen"
+                },
+                new {
+                    id = 1,
+                    title = "Ventilace 100%",
                     start = DateTime.Now.AddHours(-2).ToString("s"),
                     end = DateTime.Now.ToString("s"),
-                    allDay = false
+                    allDay = false,
+                    backgroundColor = "#378006",
+                    borderColor = "#378006",
+                    textColor = "white" 
                 }
             };
                 

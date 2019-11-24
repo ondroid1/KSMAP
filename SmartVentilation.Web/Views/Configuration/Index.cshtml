@@ -1,0 +1,93 @@
+﻿@model SmartValidation.Shared.Models.ApplicationSettings
+
+@{
+    ViewData["Title"] = "Konfigurace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "Configuration", FormMethod.Post))
+{
+    <h1>Konfigurace</h1>
+
+    @Html.ValidationSummary()
+
+    <div class="card">
+        <div class="card-header">Typy událostí</div>
+        <div class="card-body">
+            <table id="event-type-table">
+                <thead>
+                    <tr>
+                        <th>Kód</th>
+                        <th>Název</th>
+                        <th>Náběh (min)</th>
+                        <th>Doběh (min)</th>
+                        <th>Barva</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var index = 0; }
+                    @foreach (var eventType in Model.EventTypes)
+                    {
+
+                        <tr data-row="0">
+                            <td>@Html.TextBox($"EventTypes[{index}].Code", eventType.Code)</td>
+                            <td>@Html.TextBox($"EventTypes[{index}].Name", eventType.Name)</td>
+                            <td>@Html.TextBox($"EventTypes[{index}].VentilationStartUpInMinutes", eventType.VentilationStartUpInMinutes, new { @type = "number" })</td>
+                            <td>@Html.TextBox($"EventTypes[{index}].VentilationRunOutInMinutes", eventType.VentilationRunOutInMinutes, new { @type = "number" })</td>
+                            <td>
+                                @Html.DropDownList($"EventTypes[{index}].Color", new SelectList(ViewBag.Colors, "Value", "Text", eventType.Color), null, new { @class = "color-picker" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button id="add-event-type" class="btn" type="button">Přidat typ události</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Interval obnovy dat z rezervačního systému</div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <th>Čas (min)</th>
+                </tr>
+                <tr data-row="0">
+                    <td>@Html.TextBoxFor(m => m.RefreshIntervalInMinutes)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Uložit" />
+
+}
+
+
+<script>
+    $('select.color-picker').simplecolorpicker({
+        picker: true
+    }).on('change', function () {
+        //$(this).parent[].css('background-color', $('select[name="color-picker"]').val());
+    });
+
+    $('#add-event-type').click(function() {
+        const newRowIndex = $('#event-type-table > tbody > tr').length;
+
+        var newRowHtml = `<tr data-row="0">
+            <td><input name="EventTypes[${newRowIndex}].Code" type="text" /></td>
+            <td><input name="EventTypes[${newRowIndex}].Name" type="text" /></td>
+            <td><input name="EventTypes[${newRowIndex}].VentilationStartUpInMinutes" type="number" /></td>
+            <td><input name="EventTypes[${newRowIndex}].VentilationRunOutInMinutes" type="number"/></td>
+            <td>
+            @Html.DropDownList("Color", new SelectList(ViewBag.Colors, "Value", "Text"), null, new { @class = "color-picker"  })
+            </td>
+            </tr>`;
+        newRowHtml = newRowHtml.replace(/Color/g, `EventTypes[${newRowIndex}].Color`);
+    debugger;
+        $('#event-type-table > tbody:last-child').append(newRowHtml);
+        $('select.color-picker').simplecolorpicker({ picker: true });
+    });
+
+</script>
