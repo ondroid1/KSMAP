@@ -1,0 +1,28 @@
+﻿[
+  {
+    "EventType": {
+      "Code": "SCH",
+      "Name": "Schůze",
+      "Color": "#7bd148",
+      "VentilationStartUpInMinutes": 10,
+      "VentilationRunOutInMinutes": 20,
+      "IsDefault": false
+    },
+    "Name": "Schůze představenstva",
+    "TimeFrom": "2019-12-02T08:30:00+01:00",
+    "TimeTo": "2019-12-02T09:30:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Zkouška orchestru",
+    "TimeFrom": "2019-12-02T15:00:00+01:00",
+    "TimeTo": "2019-12-02T18:00:00+01:00"
+  }
+]

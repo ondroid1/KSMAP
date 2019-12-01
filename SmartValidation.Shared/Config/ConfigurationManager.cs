@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace SmartVentilation.ConsoleApp.Config
+namespace SmartValidation.Shared.Config
 {
     static class ConfigurationManager
     {

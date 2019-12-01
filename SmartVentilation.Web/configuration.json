@@ -1,19 +1,32 @@
 {
-  "RefreshIntervalInMinutes": 1,
+  "CalendarCheckIntervalInMinutes": 1,
+  "VentilationCheckIntervalInMinutes": 2,
+  "EventsFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\events.json",
+  "VentilationsFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\ventilations.json",
   "EventTypes": [
     {
-      "Code": "OS",
-      "Name": "NNN",
+      "Code": "DEF",
+      "Name": "Výchozí",
       "Color": "#fbd75b",
-      "VentilationStartUpInMinutes": 10,
-      "VentilationRunOutInMinutes": 45
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
     },
     {
-      "Code": "Test",
-      "Name": "AAA",
+      "Code": "KON",
+      "Name": "Koncert",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 10,
+      "VentilationRunOutInMinutes": 45,
+      "IsDefault": false
+    },
+    {
+      "Code": "SCH",
+      "Name": "Schůze",
       "Color": "#7bd148",
-      "VentilationStartUpInMinutes": 5,
-      "VentilationRunOutInMinutes": 20
+      "VentilationStartUpInMinutes": 10,
+      "VentilationRunOutInMinutes": 20,
+      "IsDefault": false
     }
   ]
 }
