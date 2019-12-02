@@ -29,6 +29,7 @@ namespace SmartVentilation.ConsoleApp
         {
             InitializeCalendarReadingJob(applicationConfig);
             InitializeVentilationJob(applicationConfig);
+            InitializeTemperatureJob(applicationConfig);
         }
 
         public static async void InitializeCalendarReadingJob(ApplicationConfig applicationConfig)
@@ -75,6 +76,29 @@ namespace SmartVentilation.ConsoleApp
             await scheduler.Start();
 
             var result = await scheduler.ScheduleJob(ventilationJob, ventilationJobTrigger);
+        }
+
+        public static async void InitializeTemperatureJob(ApplicationConfig applicationConfig)
+        {
+            var temperatureJob = JobBuilder.Create<TemperatureJob>()
+                .WithIdentity("TemperatureJob")
+                .Build();
+            
+            var cronSchedule = $"0 0/{applicationConfig.CalendarCheckIntervalInMinutes} * * * ?";
+
+            Console.WriteLine($"Running temperature check every {applicationConfig.CalendarCheckIntervalInMinutes} minute(s).");
+            
+            var temperatureJobTrigger = TriggerBuilder.Create()
+                .WithIdentity("TemperatureJobCron")
+                .StartNow()
+                .WithCronSchedule(cronSchedule)
+                .Build();
+
+            var scheduler = await new StdSchedulerFactory().GetScheduler();
+            
+            await scheduler.Start();
+
+            var result = await scheduler.ScheduleJob(temperatureJob, temperatureJobTrigger);
         }
     }
 }

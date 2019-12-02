@@ -8,5 +8,7 @@ namespace SmartValidation.Shared.Models
         public int VentilationCheckIntervalInMinutes { get; set; } = 15;
         public string EventsFilePath { get; set; }
         public List<ScheduledEventType> EventTypes { get; set; } = new List<ScheduledEventType>();
+        public string OpenWeatherApiKey { get; set; }
+        public string OpenWeatherApiPlace { get; set; }
     }
 }

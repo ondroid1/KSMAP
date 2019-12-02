@@ -28,5 +28,7 @@
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
     }
-  ]
+  ],
+  "OpenWeatherApiKey": "40acd75d3ee030b951192ea6ca708089",
+  "OpenWeatherApiPlace": "Pardubice"
 }
