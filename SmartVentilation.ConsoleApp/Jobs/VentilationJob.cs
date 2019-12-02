@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
-using Google.Apis.Calendar.v3.Data;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
 using Newtonsoft.Json;
 using NLog;
 using Quartz;
@@ -28,6 +22,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
         // at ~/.credentials/calendar-dotnet-quickstart.json
         private static readonly string[] Scopes = { CalendarService.Scope.CalendarReadonly };
         private readonly ApplicationConfig _applicationConfig;
+        private DateTime _now;
 
 
         public VentilationJob()
@@ -42,35 +37,70 @@ namespace SmartVentilation.ConsoleApp.Jobs
         public Task Execute(IJobExecutionContext context)
         {
             logger.Debug("Doing hard work!");
-            Console.WriteLine($"{DateTime.Now} - Ventilation Check");
-            var scheduledEvents = GetScheduledEvents();
-            RunVentilations(scheduledEvents);
+            _now = DateTime.Now;
+            Console.WriteLine($"{_now} - ****JOB**** Ventilation Check");
+            var scheduledEvents = GetCurrentEvents();
+            SendVentilationCommands(scheduledEvents);
             return Task.CompletedTask;
         }
 
-        private List<ScheduledEvent> GetScheduledEvents()
+        private List<ScheduledEvent> GetCurrentEvents()
         {
             var scheduledEventsJson = File.ReadAllText(_applicationConfig.EventsFilePath);
-            var scheduledEvents = JsonConvert.DeserializeObject<List<ScheduledEvent>>(scheduledEventsJson)
-                .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes) >= DateTime.Now 
-                            && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes) <= DateTime.Now ).ToList();
+            var currentEvents = JsonConvert.DeserializeObject<List<ScheduledEvent>>(scheduledEventsJson)
+                .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes) <= _now
+                            && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes) >= _now).ToList();
             
-            Console.WriteLine($"Current ventilations:");
-            foreach (var scheduledEvent in scheduledEvents)
+            Console.WriteLine($"Currently running events:");
+            foreach (var currentEvent in currentEvents)
             {
-                Console.WriteLine($"{scheduledEvent.EventType.Code} - {scheduledEvent.TimeFrom}");
+                Console.WriteLine($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
             }
 
-            return scheduledEvents;
+            return currentEvents;
         }
 
         /// <summary>
         /// Čtení událostí z kalendáře
-        /// https://developers.google.com/calendar/quickstart/dotnet
         /// </summary>
-        public void RunVentilations(List<ScheduledEvent> scheduledEvents)
+        public void SendVentilationCommands(List<ScheduledEvent> currentEvents)
         {
-            Console.WriteLine("RunVentilations.");
+            if (currentEvents.Count == 0)
+            {
+                Console.WriteLine("No commands to send. Making sure the ventilation unit is stopped.");
+                return;
+            }
+
+            Console.WriteLine("Sending commands to ventilation unit.");
+
+
+            var ventilationPhase = VentilationPhase.StartUp;
+
+            foreach (var currentEvent in currentEvents)
+            {
+                if (ventilationPhase != VentilationPhase.MainRun)
+                {
+                    if (currentEvent.TimeFrom <= _now && currentEvent.TimeTo >= _now)
+                    {
+                        ventilationPhase = VentilationPhase.MainRun;
+                    }
+                    else if (ventilationPhase != VentilationPhase.StartUp)
+                    {
+                        if (currentEvent.TimeFrom.AddMinutes(- currentEvent.EventType.VentilationStartUpInMinutes) >= _now 
+                            && currentEvent.TimeFrom <= _now)
+                        {
+                            ventilationPhase = VentilationPhase.StartUp;
+                        }
+                    }
+                    else if (currentEvent.TimeTo.AddMinutes(- currentEvent.EventType.VentilationRunOutInMinutes) >= _now 
+                             && currentEvent.TimeTo >= _now)
+                    {
+                        ventilationPhase = VentilationPhase.RunOut;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Sending command for {ventilationPhase}");
         }
     }
 }

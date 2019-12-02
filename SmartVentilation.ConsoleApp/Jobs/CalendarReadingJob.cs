@@ -40,7 +40,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
         public Task Execute(IJobExecutionContext context)
         {
             logger.Debug("Doing hard work!");
-            Console.WriteLine($"{DateTime.Now} - Calendar read");
+            Console.WriteLine($"{DateTime.Now} - ****JOB**** Calendar read");
             ReadFutureCalendarItems();
             return Task.CompletedTask;
         }
@@ -65,7 +65,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
                     "user",
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
-                Console.WriteLine($"Credential file saved to: {credPath}");
+                //Console.WriteLine($"Credential file saved to: {credPath}");
             }
 
             // Create Google Calendar API service.

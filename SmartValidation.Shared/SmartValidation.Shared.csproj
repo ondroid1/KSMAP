@@ -102,7 +102,7 @@
     <Compile Include="Models\ApplicationConfig.cs" />
     <Compile Include="Models\ScheduledEvent.cs" />
     <Compile Include="Models\ScheduledEventType.cs" />
-    <Compile Include="Models\VentilationEvent.cs" />
+    <Compile Include="Models\VentilationPhase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
