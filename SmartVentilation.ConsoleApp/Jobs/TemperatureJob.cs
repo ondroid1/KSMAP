@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml;
@@ -10,8 +8,8 @@ using Google.Apis.Calendar.v3;
 using Newtonsoft.Json;
 using NLog;
 using Quartz;
-using SmartValidation.Shared;
-using SmartValidation.Shared.Models;
+using SmartVentilation.Shared;
+using SmartVentilation.Shared.Models;
 
 namespace SmartVentilation.ConsoleApp.Jobs
 {
@@ -44,21 +42,20 @@ namespace SmartVentilation.ConsoleApp.Jobs
             Console.WriteLine($"{_now} - ****JOB**** Temperature Check");
             var temperature = GetCurrentTemperature();
             Console.WriteLine($"The current temperature in {_applicationConfig.OpenWeatherApiPlace} is {temperature}°C");
+            File.WriteAllText(_applicationConfig.TemperatureFilePath, JsonConvert.SerializeObject(temperature));
             return Task.CompletedTask;
         }
 
         private int GetCurrentTemperature()
         {
-            using (WebClient client = new WebClient())
-            {
-                var apiUrl =
-                    $"http://api.openweathermap.org/data/2.5/weather?q={_applicationConfig.OpenWeatherApiPlace}&mode=xml&units=metric&APPID={_applicationConfig.OpenWeatherApiKey}";
-                string xmlContent = client.DownloadString(apiUrl);
-                var xmlDocument = new XmlDocument();
-                xmlDocument.LoadXml(xmlContent);
+            using WebClient client = new WebClient();
+            var apiUrl =
+                $"http://api.openweathermap.org/data/2.5/weather?q={_applicationConfig.OpenWeatherApiPlace}&mode=xml&units=metric&APPID={_applicationConfig.OpenWeatherApiKey}";
+            string xmlContent = client.DownloadString(apiUrl);
+            var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(xmlContent);
 
-                return GetTemperature(xmlDocument);
-            }
+            return GetTemperature(xmlDocument);
         }
 
         public int GetTemperature(XmlDocument xmlDocument)

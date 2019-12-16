@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SmartValidation.Shared.Models
+namespace SmartVentilation.Shared.Models
 {
     public class ScheduledEventType
     {

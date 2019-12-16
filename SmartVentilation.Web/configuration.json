@@ -2,7 +2,8 @@
   "CalendarCheckIntervalInMinutes": 1,
   "VentilationCheckIntervalInMinutes": 2,
   "EventsFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\events.json",
-  "VentilationsFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\ventilations.json",
+  //"VentilationFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\ventilation.json",
+  "TemperatureFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\temperature.json",
   "EventTypes": [
     {
       "Code": "DEF",

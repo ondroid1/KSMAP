@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SmartValidation.Shared.Models
+namespace SmartVentilation.Shared.Models
 {
     public class ScheduledEvent
     {

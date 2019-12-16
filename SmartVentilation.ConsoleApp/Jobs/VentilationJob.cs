@@ -7,8 +7,8 @@ using Google.Apis.Calendar.v3;
 using Newtonsoft.Json;
 using NLog;
 using Quartz;
-using SmartValidation.Shared;
-using SmartValidation.Shared.Models;
+using SmartVentilation.Shared;
+using SmartVentilation.Shared.Models;
 
 namespace SmartVentilation.ConsoleApp.Jobs
 {

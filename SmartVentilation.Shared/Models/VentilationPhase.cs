@@ -1,4 +1,4 @@
-﻿namespace SmartValidation.Shared.Models
+﻿namespace SmartVentilation.Shared.Models
 {
     public enum VentilationPhase 
     {

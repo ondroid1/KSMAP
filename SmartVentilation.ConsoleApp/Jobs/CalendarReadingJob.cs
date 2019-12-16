@@ -13,8 +13,8 @@ using Google.Apis.Util.Store;
 using Newtonsoft.Json;
 using NLog;
 using Quartz;
-using SmartValidation.Shared;
-using SmartValidation.Shared.Models;
+using SmartVentilation.Shared;
+using SmartVentilation.Shared.Models;
 
 namespace SmartVentilation.ConsoleApp.Jobs
 {

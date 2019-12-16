@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SmartValidation.Shared\SmartValidation.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Microsoft.Extensions.DependencyInjection">
       <HintPath>..\..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\3.0.0\ref\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
@@ -33,6 +29,10 @@
 
   <ItemGroup>
     <Folder Include="OpenWeatherApi\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmartVentilation.Shared\SmartVentilation.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -29,7 +29,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\SmartValidation.Shared\SmartValidation.Shared.csproj" />
+    <ProjectReference Include="..\SmartVentilation.Shared\SmartVentilation.Shared.csproj" />
   </ItemGroup>
 
 </Project>

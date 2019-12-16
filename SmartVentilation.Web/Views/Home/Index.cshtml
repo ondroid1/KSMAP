@@ -1,11 +1,25 @@
-﻿@{
+﻿@model  SmartVentilation.Web.Models.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Ventilation Schedule</h1>
-    <div id="calendar"></div>
-</div>
+    <div class="text-center">
+
+        <h1 class="display-4">
+            Plán ventilace
+            
+        </h1>
+        <h3>
+            <a href="/?date=@Model.ViewDate.AddDays(-1).ToString("yyyy-MM-dd")">◀</a>
+            @Model.ViewDate.ToShortDateString()
+            <a href="/?date=@Model.ViewDate.AddDays(1).ToString("yyyy-MM-dd")">▶</a>
+        </h3>
+        @if (Model.Temperature != null)
+        {
+            <h3>Venkovní teplota: @Model.Temperature °C</h3>
+        }
+        <div id="calendar"></div>
+    </div>
 
 <script>
     $(document).ready(function () {

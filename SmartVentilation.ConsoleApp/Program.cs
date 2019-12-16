@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
-using Newtonsoft.Json;
 using Quartz;
 using Quartz.Impl;
-using SmartValidation.Shared;
-using SmartValidation.Shared.Models;
 using SmartVentilation.ConsoleApp.Jobs;
+using SmartVentilation.Shared;
+using SmartVentilation.Shared.Models;
 
 namespace SmartVentilation.ConsoleApp
 {
@@ -25,7 +23,7 @@ namespace SmartVentilation.ConsoleApp
 
     public static class Job
     {
-        public static async void InitializeJobs(ApplicationConfig applicationConfig)
+        public static void InitializeJobs(ApplicationConfig applicationConfig)
         {
             InitializeCalendarReadingJob(applicationConfig);
             InitializeVentilationJob(applicationConfig);

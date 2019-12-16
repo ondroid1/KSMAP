@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVentilation.ConsoleApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartVentilation.Web", "SmartVentilation.Web\SmartVentilation.Web.csproj", "{98761FCB-E950-421C-8663-D01EB0671308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartValidation.Shared", "SmartValidation.Shared\SmartValidation.Shared.csproj", "{8F55A68F-E2FB-4860-A8FA-4E97DBB9D4E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartVentilation.Shared", "SmartVentilation.Shared\SmartVentilation.Shared.csproj", "{C4455E49-374D-48B4-ACD4-C7031D03E219}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{98761FCB-E950-421C-8663-D01EB0671308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98761FCB-E950-421C-8663-D01EB0671308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98761FCB-E950-421C-8663-D01EB0671308}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F55A68F-E2FB-4860-A8FA-4E97DBB9D4E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F55A68F-E2FB-4860-A8FA-4E97DBB9D4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F55A68F-E2FB-4860-A8FA-4E97DBB9D4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F55A68F-E2FB-4860-A8FA-4E97DBB9D4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4455E49-374D-48B4-ACD4-C7031D03E219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4455E49-374D-48B4-ACD4-C7031D03E219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4455E49-374D-48B4-ACD4-C7031D03E219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4455E49-374D-48B4-ACD4-C7031D03E219}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SmartValidation.Shared.Config;
-using SmartValidation.Shared.Models;
+﻿using Newtonsoft.Json;
+using SmartVentilation.Shared.Config;
+using SmartVentilation.Shared.Models;
 
-namespace SmartValidation.Shared
+namespace SmartVentilation.Shared
 {
     public class ApplicationConfigHelper
     {

@@ -1,29 +1,16 @@
 ﻿[
   {
     "EventType": {
-      "Code": "KON",
-      "Name": "Koncert",
+      "Code": "DEF",
+      "Name": "Výchozí",
       "Color": "#fbd75b",
-      "VentilationStartUpInMinutes": 10,
-      "VentilationRunOutInMinutes": 45,
-      "IsDefault": false
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
     },
-    "Name": "Koncert2",
-    "TimeFrom": "2019-12-02T21:00:00+01:00",
-    "TimeTo": "2019-12-03T00:00:00+01:00"
-  },
-  {
-    "EventType": {
-      "Code": "SCH",
-      "Name": "Schůze",
-      "Color": "#7bd148",
-      "VentilationStartUpInMinutes": 10,
-      "VentilationRunOutInMinutes": 20,
-      "IsDefault": false
-    },
-    "Name": "Schůze představenstva",
-    "TimeFrom": "2019-12-09T08:30:00+01:00",
-    "TimeTo": "2019-12-09T09:30:00+01:00"
+    "Name": "Dětský klub",
+    "TimeFrom": "2019-12-16T12:00:00+01:00",
+    "TimeTo": "2019-12-16T14:00:00+01:00"
   },
   {
     "EventType": {
@@ -35,7 +22,176 @@
       "IsDefault": true
     },
     "Name": "Zkouška orchestru",
-    "TimeFrom": "2019-12-09T15:00:00+01:00",
-    "TimeTo": "2019-12-09T18:00:00+01:00"
+    "TimeFrom": "2019-12-16T15:00:00+01:00",
+    "TimeTo": "2019-12-16T18:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Úklid",
+    "TimeFrom": "2019-12-17T10:00:00+01:00",
+    "TimeTo": "2019-12-17T11:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Dětský klub",
+    "TimeFrom": "2019-12-17T12:00:00+01:00",
+    "TimeTo": "2019-12-17T14:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Taneční kroužek",
+    "TimeFrom": "2019-12-17T15:00:00+01:00",
+    "TimeTo": "2019-12-17T16:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Úklid",
+    "TimeFrom": "2019-12-18T10:00:00+01:00",
+    "TimeTo": "2019-12-18T11:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Dětský klub",
+    "TimeFrom": "2019-12-18T12:00:00+01:00",
+    "TimeTo": "2019-12-18T14:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Taneční kroužek",
+    "TimeFrom": "2019-12-18T15:00:00+01:00",
+    "TimeTo": "2019-12-18T16:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Úklid",
+    "TimeFrom": "2019-12-19T10:00:00+01:00",
+    "TimeTo": "2019-12-19T11:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Dětský klub",
+    "TimeFrom": "2019-12-19T12:00:00+01:00",
+    "TimeTo": "2019-12-19T14:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Taneční kroužek",
+    "TimeFrom": "2019-12-19T15:00:00+01:00",
+    "TimeTo": "2019-12-19T16:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Úklid",
+    "TimeFrom": "2019-12-20T10:00:00+01:00",
+    "TimeTo": "2019-12-20T11:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Dětský klub",
+    "TimeFrom": "2019-12-20T12:00:00+01:00",
+    "TimeTo": "2019-12-20T14:00:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "SCH",
+      "Name": "Schůze",
+      "Color": "#7bd148",
+      "VentilationStartUpInMinutes": 10,
+      "VentilationRunOutInMinutes": 20,
+      "IsDefault": false
+    },
+    "Name": "Schůze představenstva",
+    "TimeFrom": "2019-12-23T08:30:00+01:00",
+    "TimeTo": "2019-12-23T09:30:00+01:00"
+  },
+  {
+    "EventType": {
+      "Code": "DEF",
+      "Name": "Výchozí",
+      "Color": "#fbd75b",
+      "VentilationStartUpInMinutes": 30,
+      "VentilationRunOutInMinutes": 30,
+      "IsDefault": true
+    },
+    "Name": "Úklid",
+    "TimeFrom": "2019-12-23T10:00:00+01:00",
+    "TimeTo": "2019-12-23T11:00:00+01:00"
   }
 ]

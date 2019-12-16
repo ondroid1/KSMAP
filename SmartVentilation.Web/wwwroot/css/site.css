@@ -81,3 +81,7 @@ body {
 .validation-summary-errors {
     color: red;
 }
+
+.fc table {
+    margin-bottom: 20px;
+}

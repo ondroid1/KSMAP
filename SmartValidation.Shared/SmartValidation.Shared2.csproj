@@ -97,12 +97,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationConfigHelper.cs" />
-    <Compile Include="Config\ConfigurationManager.cs" />
-    <Compile Include="Models\ApplicationConfig.cs" />
-    <Compile Include="Models\ScheduledEvent.cs" />
-    <Compile Include="Models\ScheduledEventType.cs" />
-    <Compile Include="Models\VentilationPhase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
