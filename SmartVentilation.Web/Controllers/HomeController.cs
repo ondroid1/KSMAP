@@ -50,47 +50,47 @@ namespace SmartVentilation.Web.Controllers
             return View(model);
         }
 
-        public async Task<JsonResult> GetEvents(double start, double end)
+        public async Task<JsonResult> GetEvents(string date)
         {
-            //var userName = Session["UserName"] as string;
-            //if (string.IsNullOrEmpty(userName))
-            //{
-            //    return null;
-            //}
-
-            var fromDate = ConvertFromUnixTimestamp(start);
-            var toDate = ConvertFromUnixTimestamp(end);
+            if (!DateTime.TryParseExact(date, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out DateTime viewDate))
+            {
+                viewDate = DateTime.Now.Date;
+            }
 
             var eventService = new EventService();
-            var eventList = await eventService.GetScheduledEvents(_applicationConfig.EventsFilePath, fromDate, toDate);
+            var eventList = await eventService.GetScheduledEvents(_applicationConfig.EventsFilePath, viewDate, viewDate.AddDays(1));
+            var calendarEventList = new List<CalendarEvent>();
+            foreach (var scheduledEvent in eventList)
+            {
+                calendarEventList.Add(new CalendarEvent(scheduledEvent));
+            }
 
+            var eventList2 = new object[]
+            {
+                new {
+                    id = 1,
+                    title = "Náběh",
+                    start = DateTime.Now.AddHours(-2.5).ToString("s"),
+                    end = DateTime.Now.AddHours(-2).ToString("s"),
+                    allDay = false,
+                    backgroundColor = "lightgreen",
+                    borderColor = "lightgreen"
+                },
+                new {
+                    id = 1,
+                    title = "Ventilace 100%",
+                    start = DateTime.Now.AddHours(-2).ToString("s"),
+                    end = DateTime.Now.ToString("s"),
+                    allDay = false,
+                    backgroundColor = "#378006",
+                    borderColor = "#378006",
+                    textColor = "white"
+                }
+            };
 
-            //var eventList = new object[]
-            //{
-            //    new {
-            //        id = 1,
-            //        title = "Náběh",
-            //        start = DateTime.Now.AddHours(-2.5).ToString("s"),
-            //        end = DateTime.Now.AddHours(-2).ToString("s"),
-            //        allDay = false,
-            //        backgroundColor = "lightgreen",
-            //        borderColor = "lightgreen"
-            //    },
-            //    new {
-            //        id = 1,
-            //        title = "Ventilace 100%",
-            //        start = DateTime.Now.AddHours(-2).ToString("s"),
-            //        end = DateTime.Now.ToString("s"),
-            //        allDay = false,
-            //        backgroundColor = "#378006",
-            //        borderColor = "#378006",
-            //        textColor = "white" 
-            //    }
-            //};
-
-
-            //var rows = eventList.ToArray();
-            return Json(eventList);
+            return Json(calendarEventList);
+            //return Json(eventList2);
         }
 
         

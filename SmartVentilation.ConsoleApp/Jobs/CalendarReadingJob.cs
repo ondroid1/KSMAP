@@ -77,8 +77,8 @@ namespace SmartVentilation.ConsoleApp.Jobs
 
             // Define parameters of request.
             EventsResource.ListRequest request = service.Events.List("nek71fi8o6nrkukvusvdbv90i8@group.calendar.google.com");
-            request.TimeMin = DateTime.Now;
-            request.TimeMax = DateTime.Now.AddDays(7);
+            request.TimeMin = DateTime.Now.Date;
+            request.TimeMax = DateTime.Now.Date.AddDays(8);
             request.ShowDeleted = false;
             request.SingleEvents = true;
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;

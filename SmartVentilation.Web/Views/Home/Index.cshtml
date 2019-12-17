@@ -10,9 +10,9 @@
             
         </h1>
         <h3>
-            <a href="/?date=@Model.ViewDate.AddDays(-1).ToString("yyyy-MM-dd")">◀</a>
+            <a href="/?date=@Model.ViewDate.AddDays(-1).ToString("yyyy-MM-dd")">ᐊ</a>
             @Model.ViewDate.ToShortDateString()
-            <a href="/?date=@Model.ViewDate.AddDays(1).ToString("yyyy-MM-dd")">▶</a>
+        <a href="/?date=@Model.ViewDate.AddDays(1).ToString("yyyy-MM-dd")">ᐅ</a>
         </h3>
         @if (Model.Temperature != null)
         {
@@ -31,8 +31,12 @@
                 right: ''
             },
             defaultView: 'agendaDay',
+            axisFormat: 'H:mm',
+            timeFormat: 'H:mm',
+            nowIndicator: true,
+            now: '@DateTime.Now.ToString("s")',
             editable: false,
-            events: "/Home/GetEvents/",
+            events: "/Home/GetEvents?date=@Context.Request.Query["date"]",
             eventColor: '#378006'
         });
     });
