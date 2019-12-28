@@ -1,4 +1,8 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using Quartz;
 using Quartz.Impl;
 using SmartVentilation.ConsoleApp.Jobs;
@@ -14,9 +18,7 @@ namespace SmartVentilation.ConsoleApp
             var applicationConfig = ApplicationConfigHelper.GetApplicationConfig();
 
             Job.InitializeJobs(applicationConfig);
-
             Console.WriteLine("Quartz jobs started!");
-
             Console.ReadLine();
         }
     }

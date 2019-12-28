@@ -3,7 +3,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -16,7 +16,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -34,7 +34,7 @@
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
     },
-    "Name": "schůze hasičů",
+    "Name": "Schůze hasičů",
     "TimeFrom": "2019-12-28T17:00:00+01:00",
     "TimeTo": "2019-12-28T18:00:00+01:00"
   },
@@ -42,7 +42,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -55,7 +55,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -73,7 +73,7 @@
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
     },
-    "Name": "schůze myslivců",
+    "Name": "Schůze myslivců",
     "TimeFrom": "2019-12-29T17:00:00+01:00",
     "TimeTo": "2019-12-29T18:00:00+01:00"
   },
@@ -107,7 +107,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -146,7 +146,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -159,7 +159,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -185,7 +185,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -198,7 +198,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -224,7 +224,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -237,7 +237,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -263,7 +263,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -276,7 +276,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -289,7 +289,7 @@
     "EventType": {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
@@ -307,7 +307,7 @@
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
     },
-    "Name": "schůze hasičů",
+    "Name": "Schůze hasičů",
     "TimeFrom": "2020-01-04T17:00:00+01:00",
     "TimeTo": "2020-01-04T18:00:00+01:00"
   }

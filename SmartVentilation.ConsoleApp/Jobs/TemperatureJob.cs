@@ -16,16 +16,12 @@ namespace SmartVentilation.ConsoleApp.Jobs
     [DisallowConcurrentExecution]
     public class TemperatureJob : IJob
     {
-        private static ILogger logger = LogManager.GetCurrentClassLogger();
-
-        private const string ApplicationName = "Smart Ventilation";
+        private static ILogger logger = LogManager.GetLogger("temperatureLogger"); //.GetCurrentClassLogger();
 
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/calendar-dotnet-quickstart.json
         private static readonly string[] Scopes = {CalendarService.Scope.CalendarReadonly};
         private readonly ApplicationConfig _applicationConfig;
-        private DateTime _now;
-
 
         public TemperatureJob()
         {
@@ -38,11 +34,11 @@ namespace SmartVentilation.ConsoleApp.Jobs
         /// </summary>
         public Task Execute(IJobExecutionContext context)
         {
-            _now = DateTime.Now;
-            Console.WriteLine($"{_now} - ****JOB**** Temperature Check");
+            logger.Info("ZAČÁTEK čtení teploty");
             var temperature = GetCurrentTemperature();
-            Console.WriteLine($"The current temperature in {_applicationConfig.OpenWeatherApiPlace} is {temperature}°C");
+            logger.Info($"Aktuální teplota v místě {_applicationConfig.OpenWeatherApiPlace} je {temperature}°C");
             File.WriteAllText(_applicationConfig.TemperatureFilePath, JsonConvert.SerializeObject(temperature));
+            logger.Info("KONEC čtení teploty");
             return Task.CompletedTask;
         }
 

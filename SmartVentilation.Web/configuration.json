@@ -17,7 +17,7 @@
     {
       "Code": "KON",
       "Name": "Koncert",
-      "Color": "#a4bdcf",
+      "Color": "#dbadff",
       "VentilationStartUpInMinutes": 10,
       "VentilationRunOutInMinutes": 45,
       "IsDefault": false
@@ -33,7 +33,7 @@
     {
       "Code": "KLB",
       "Name": "Klub",
-      "Color": "#dbadff",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false

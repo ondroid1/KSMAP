@@ -21,7 +21,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
     [DisallowConcurrentExecution]
     public class CalendarReadingJob : IJob
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger logger = LogManager.GetLogger("reservationLogger");
         private readonly ApplicationConfig _applicationConfig;
         private const string ApplicationName = "Smart Ventilation";
         // If modifying these scopes, delete your previously saved credentials
@@ -39,9 +39,9 @@ namespace SmartVentilation.ConsoleApp.Jobs
         /// </summary>
         public Task Execute(IJobExecutionContext context)
         {
-            logger.Debug("Doing hard work!");
-            Console.WriteLine($"{DateTime.Now} - ****JOB**** Calendar read");
+            logger.Info("ZAČÁTEK čtení z rezervačního systému");
             ReadFutureCalendarItems();
+            logger.Info("KONEC čtení z rezervačního systému");
             return Task.CompletedTask;
         }
 
@@ -85,7 +85,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
 
             // List events.
             Events events = request.Execute();
-            Console.WriteLine("Upcoming events:");
+            logger.Info("Načtené události");
             if (events.Items != null && events.Items.Count > 0)
             {
                 var scheduledEvents = new List<ScheduledEvent>();
@@ -105,15 +105,14 @@ namespace SmartVentilation.ConsoleApp.Jobs
                         EventType = GetEventType(eventItem.Summary)
                     });
 
-                    Console.WriteLine("{0} ({1})", eventItem.Summary, eventItem.Start.DateTime.ToString());
+                    logger.Info($"{eventItem.Summary} ({eventItem.Start.DateTime.ToString()})");
                 }
 
                 File.WriteAllText(_applicationConfig.EventsFilePath, JsonConvert.SerializeObject(scheduledEvents, Formatting.Indented), Encoding.UTF8);
-                Console.WriteLine($"Events saved to {_applicationConfig.EventsFilePath}");
             }
             else
             {
-                Console.WriteLine("No upcoming events found.");
+                logger.Info("V rezervačním systému nebyly nalezeny žádné budoucí události");
             }
         }
 

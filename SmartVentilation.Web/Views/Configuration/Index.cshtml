@@ -88,7 +88,23 @@
         </div>
     </div>
 
-    <input type="submit" class="btn btn-primary" value="Uložit" />
+    <div class="card">
+        <div class="card-header">Lokace pro čtení venkovní teploty z Open Weather Map API</div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <th>Město</th>
+                </tr>
+                <tr data-row="0">
+                    <td>@Html.TextBoxFor(m => m.OpenWeatherApiPlace)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    
+
+    <input type = "submit" class="btn btn-primary" value="Uložit" />
 
 }
 

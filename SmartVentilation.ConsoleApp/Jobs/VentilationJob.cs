@@ -15,7 +15,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
     [DisallowConcurrentExecution]
     public class VentilationJob : IJob
     {
-        private static ILogger logger = LogManager.GetCurrentClassLogger();
+        private static ILogger logger = LogManager.GetLogger("ventilationLogger");
 
         private const string ApplicationName = "Smart Ventilation";
         // If modifying these scopes, delete your previously saved credentials
@@ -36,11 +36,10 @@ namespace SmartVentilation.ConsoleApp.Jobs
         /// </summary>
         public Task Execute(IJobExecutionContext context)
         {
-            logger.Debug("Doing hard work!");
-            _now = DateTime.Now;
-            Console.WriteLine($"{_now} - ****JOB**** Ventilation Check");
+            logger.Info($"Začátek řízení ventilace");
             var scheduledEvents = GetCurrentEvents();
             SendVentilationCommands(scheduledEvents);
+            logger.Info("Konec řízení ventilace");
             return Task.CompletedTask;
         }
 
@@ -51,10 +50,10 @@ namespace SmartVentilation.ConsoleApp.Jobs
                 .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes) <= _now
                             && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes) >= _now).ToList();
             
-            Console.WriteLine($"Currently running events:");
+            logger.Info($"Právě probíhající události:");
             foreach (var currentEvent in currentEvents)
             {
-                Console.WriteLine($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
+                logger.Info($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
             }
 
             return currentEvents;
@@ -67,12 +66,9 @@ namespace SmartVentilation.ConsoleApp.Jobs
         {
             if (currentEvents.Count == 0)
             {
-                Console.WriteLine("No commands to send. Making sure the ventilation unit is stopped.");
+                logger.Info("Ventilace nastavena na fázi STOP");
                 return;
             }
-
-            Console.WriteLine("Sending commands to ventilation unit.");
-
 
             var ventilationPhase = VentilationPhase.StartUp;
 
@@ -100,7 +96,7 @@ namespace SmartVentilation.ConsoleApp.Jobs
                 }
             }
 
-            Console.WriteLine($"Sending command for {ventilationPhase}");
+            logger.Info($"Ventilace nastavena na fázi {ventilationPhase.ToString().ToUpper()}");
         }
     }
 }
