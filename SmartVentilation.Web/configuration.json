@@ -1,6 +1,7 @@
 {
   "CalendarCheckIntervalInMinutes": 1,
   "VentilationCheckIntervalInMinutes": 2,
+  "TemperatureCheckIntervalInMinutes": 5,
   "EventsFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\events.json",
   //"VentilationFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\ventilation.json",
   "TemperatureFilePath": "c:\\Data\\Projects\\UHK\\KSMAP-SmartVentilation\\temperature.json",
@@ -16,7 +17,7 @@
     {
       "Code": "KON",
       "Name": "Koncert",
-      "Color": "#fbd75b",
+      "Color": "#a4bdcf",
       "VentilationStartUpInMinutes": 10,
       "VentilationRunOutInMinutes": 45,
       "IsDefault": false
@@ -26,6 +27,14 @@
       "Name": "Schůze",
       "Color": "#7bd148",
       "VentilationStartUpInMinutes": 10,
+      "VentilationRunOutInMinutes": 20,
+      "IsDefault": false
+    },
+    {
+      "Code": "KLB",
+      "Name": "Klub",
+      "Color": "#dbadff",
+      "VentilationStartUpInMinutes": 20,
       "VentilationRunOutInMinutes": 20,
       "IsDefault": false
     }

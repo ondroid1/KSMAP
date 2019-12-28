@@ -60,6 +60,34 @@
         </div>
     </div>
 
+    <div class="card">
+        <div class="card-header">Interval pro získávání teploty z Open Weather Map</div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <th>Čas (min)</th>
+                </tr>
+                <tr data-row="0">
+                    <td>@Html.TextBoxFor(m => m.TemperatureCheckIntervalInMinutes)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Interval pro vyhodnocení změny běhu ventilace</div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <th>Čas (min)</th>
+                </tr>
+                <tr data-row="0">
+                    <td>@Html.TextBoxFor(m => m.VentilationCheckIntervalInMinutes)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
     <input type="submit" class="btn btn-primary" value="Uložit" />
 
 }

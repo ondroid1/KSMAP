@@ -25,11 +25,19 @@
     $(document).ready(function () {
         $('#calendar').fullCalendar({
             theme: false,
+            //header: {
+            //    left: '',
+            //    center: '',
+            //    right: ''
+            //},
             header: {
                 left: '',
                 center: '',
                 right: ''
             },
+            height: 100,
+            contentHeight: 200,
+            scrollTime: '06:00:00',
             defaultView: 'agendaDay',
             axisFormat: 'H:mm',
             timeFormat: 'H:mm',
@@ -37,7 +45,7 @@
             now: '@DateTime.Now.ToString("s")',
             editable: false,
             events: "/Home/GetEvents?date=@Context.Request.Query["date"]",
-            eventColor: '#378006'
+            //eventColor: '#378006'
         });
     });
 </script>

@@ -1,10 +1,11 @@
 ﻿using SmartVentilation.Shared.Models;
+using System;
 
 namespace SmartVentilation.Web.Models
 {
     public class CalendarEvent
     {
-        public CalendarEvent(ScheduledEvent scheduledEvent)
+        public CalendarEvent(ScheduledEvent scheduledEvent, VentilationPhase ventilationPhase)
         {
             // TODO
             Id = 1;
@@ -12,17 +13,20 @@ namespace SmartVentilation.Web.Models
             Start = scheduledEvent.TimeFrom.ToString("s");
             End = scheduledEvent.TimeTo.ToString("s");
             AllDay = false;
-            BackgroundColor = "lightgreen";
-            BorderColor = "lightgreen";
+            BackgroundColor = scheduledEvent.EventType.Color;
+            BorderColor = "antiquewhite";
+            VentilationPhase = ventilationPhase;
+            ClassName = ventilationPhase == VentilationPhase.MainRun ? "" : "background-stripe";
         }
 
-        public int Id { get; set;}                  //        id = 1,
-        public string Title { get; set;}            //        title = "Náběh",
-        public string Start { get; set;}            //        start = DateTime.Now.AddHours(-2.5).ToString("s"),
-        public string End { get; set;}              //        end = DateTime.Now.AddHours(-2).ToString("s"),
-        public bool AllDay { get; set;}             //        allDay = false,
-        public string BackgroundColor { get; set;}  //        backgroundColor = "lightgreen",
-        public string BorderColor { get; set;}      //        borderColor = "lightgreen"
-
+        public int Id { get; set;}                  
+        public string Title { get; set;}            
+        public string Start { get; set;}            
+        public string End { get; set;}              
+        public bool AllDay { get; set;}             
+        public string BackgroundColor { get; set;}  
+        public string BorderColor { get; set;}    
+        public string ClassName { get; set;}      // CSS Class Name
+        public VentilationPhase VentilationPhase { get; set;}      
     }
 }

@@ -82,9 +82,9 @@ namespace SmartVentilation.ConsoleApp
                 .WithIdentity("TemperatureJob")
                 .Build();
             
-            var cronSchedule = $"0 0/{applicationConfig.CalendarCheckIntervalInMinutes} * * * ?";
+            var cronSchedule = $"0 0/{applicationConfig.TemperatureCheckIntervalInMinutes} * * * ?";
 
-            Console.WriteLine($"Running temperature check every {applicationConfig.CalendarCheckIntervalInMinutes} minute(s).");
+            Console.WriteLine($"Running temperature check every {applicationConfig.TemperatureCheckIntervalInMinutes} minute(s).");
             
             var temperatureJobTrigger = TriggerBuilder.Create()
                 .WithIdentity("TemperatureJobCron")

@@ -6,6 +6,7 @@ namespace SmartVentilation.Shared.Models
     {
         public int CalendarCheckIntervalInMinutes { get; set; } = 15;
         public int VentilationCheckIntervalInMinutes { get; set; } = 15;
+        public int TemperatureCheckIntervalInMinutes { get; set; } = 15;
         public string EventsFilePath { get; set; }
         public string VentilationFilePath { get; set; }
         public string TemperatureFilePath { get; set; }

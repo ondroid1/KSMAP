@@ -85,3 +85,11 @@ body {
 .fc table {
     margin-bottom: 20px;
 }
+
+.background-stripe {
+    background: repeating-linear-gradient( 135deg, transparent, transparent 10px, #ccc 10px, #ccc 12px )
+}
+
+#calendar {
+    height: 300px
+}

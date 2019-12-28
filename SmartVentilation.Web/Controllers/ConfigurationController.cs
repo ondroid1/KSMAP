@@ -21,6 +21,7 @@ namespace SmartVentilation.Web.Controllers
         [HttpPost]
         public IActionResult Index(ApplicationConfig model)
         {
+            // TODO - ukládání
             if (TryValidateModel(model))
             {
                 var json = JsonConvert.SerializeObject(model, Formatting.Indented);

@@ -61,39 +61,16 @@ namespace SmartVentilation.Web.Controllers
             var eventService = new EventService();
             var eventList = await eventService.GetScheduledEvents(_applicationConfig.EventsFilePath, viewDate, viewDate.AddDays(1));
             var calendarEventList = new List<CalendarEvent>();
+            
             foreach (var scheduledEvent in eventList)
             {
-                calendarEventList.Add(new CalendarEvent(scheduledEvent));
+                AddStartUpAndRunOut(calendarEventList, scheduledEvent);
+                calendarEventList.Add(new CalendarEvent(scheduledEvent, VentilationPhase.MainRun));
             }
 
-            var eventList2 = new object[]
-            {
-                new {
-                    id = 1,
-                    title = "Náběh",
-                    start = DateTime.Now.AddHours(-2.5).ToString("s"),
-                    end = DateTime.Now.AddHours(-2).ToString("s"),
-                    allDay = false,
-                    backgroundColor = "lightgreen",
-                    borderColor = "lightgreen"
-                },
-                new {
-                    id = 1,
-                    title = "Ventilace 100%",
-                    start = DateTime.Now.AddHours(-2).ToString("s"),
-                    end = DateTime.Now.ToString("s"),
-                    allDay = false,
-                    backgroundColor = "#378006",
-                    borderColor = "#378006",
-                    textColor = "white"
-                }
-            };
-
             return Json(calendarEventList);
-            //return Json(eventList2);
         }
 
-        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -105,6 +82,36 @@ namespace SmartVentilation.Web.Controllers
         {
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp);
+        }
+
+        // TODO přemísunout ven z kontroleru
+        private static void AddStartUpAndRunOut(List<CalendarEvent> calendarEventList, ScheduledEvent scheduledEvent)
+        {
+            if (scheduledEvent.EventType.VentilationStartUpInMinutes > 0)
+            {
+                var startUpEvent = new ScheduledEvent
+                {
+                    EventType = scheduledEvent.EventType,
+                    Name = $"Náběh - {scheduledEvent.Name}",
+                    TimeFrom = scheduledEvent.TimeFrom.AddMinutes(-scheduledEvent.EventType
+                        .VentilationStartUpInMinutes),
+                    TimeTo = scheduledEvent.TimeFrom
+                };
+                calendarEventList.Add(new CalendarEvent(startUpEvent, VentilationPhase.StartUp));
+            }
+
+            if (scheduledEvent.EventType.VentilationRunOutInMinutes > 0)
+            {
+                var startUpEvent = new ScheduledEvent
+                {
+                    EventType = scheduledEvent.EventType,
+                    Name = $"Doběh - {scheduledEvent.Name}",
+                    TimeFrom = scheduledEvent.TimeTo,
+                    TimeTo = scheduledEvent.TimeTo.AddMinutes(scheduledEvent.EventType
+                        .VentilationRunOutInMinutes)
+                };
+                calendarEventList.Add(new CalendarEvent(startUpEvent, VentilationPhase.RunOut));
+            }
         }
     }
 }
