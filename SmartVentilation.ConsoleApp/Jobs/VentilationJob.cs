@@ -9,13 +9,14 @@ using NLog;
 using Quartz;
 using SmartVentilation.Shared;
 using SmartVentilation.Shared.Models;
+using SmartVentilation.Shared.Services;
 
 namespace SmartVentilation.ConsoleApp.Jobs
 {
     [DisallowConcurrentExecution]
     public class VentilationJob : IJob
     {
-        private static ILogger logger = LogManager.GetLogger("ventilationLogger");
+        private static readonly ILogger logger = LogManager.GetLogger("ventilationLogger");
 
         private const string ApplicationName = "Smart Ventilation";
         // If modifying these scopes, delete your previously saved credentials
@@ -37,32 +38,18 @@ namespace SmartVentilation.ConsoleApp.Jobs
         public Task Execute(IJobExecutionContext context)
         {
             logger.Info($"Začátek řízení ventilace");
-            var scheduledEvents = GetCurrentEvents();
-            SendVentilationCommands(scheduledEvents);
+
+            var temperatureBasedExtraMinutes = GetTemperatureBasedExtraMinutes().Result;
+            var scheduledEvents = GetCurrentEvents(temperatureBasedExtraMinutes);
+            SendVentilationCommands(scheduledEvents, temperatureBasedExtraMinutes);
             logger.Info("Konec řízení ventilace");
             return Task.CompletedTask;
-        }
-
-        private List<ScheduledEvent> GetCurrentEvents()
-        {
-            var scheduledEventsJson = File.ReadAllText(_applicationConfig.EventsFilePath);
-            var currentEvents = JsonConvert.DeserializeObject<List<ScheduledEvent>>(scheduledEventsJson)
-                .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes) <= _now
-                            && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes) >= _now).ToList();
-            
-            logger.Info($"Právě probíhající události:");
-            foreach (var currentEvent in currentEvents)
-            {
-                logger.Info($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
-            }
-
-            return currentEvents;
         }
 
         /// <summary>
         /// Čtení událostí z kalendáře
         /// </summary>
-        public void SendVentilationCommands(List<ScheduledEvent> currentEvents)
+        public void SendVentilationCommands(List<ScheduledEvent> currentEvents, int temperatureBasedExtraMinutes)
         {
             if (currentEvents.Count == 0)
             {
@@ -82,13 +69,15 @@ namespace SmartVentilation.ConsoleApp.Jobs
                     }
                     else if (ventilationPhase != VentilationPhase.StartUp)
                     {
-                        if (currentEvent.TimeFrom.AddMinutes(- currentEvent.EventType.VentilationStartUpInMinutes) >= _now 
+                        if (currentEvent.TimeFrom
+                                .AddMinutes(- currentEvent.EventType.VentilationStartUpInMinutes - temperatureBasedExtraMinutes) >= _now 
                             && currentEvent.TimeFrom <= _now)
                         {
                             ventilationPhase = VentilationPhase.StartUp;
                         }
                     }
-                    else if (currentEvent.TimeTo.AddMinutes(- currentEvent.EventType.VentilationRunOutInMinutes) >= _now 
+                    else if (currentEvent.TimeTo
+                                 .AddMinutes(- currentEvent.EventType.VentilationRunOutInMinutes + temperatureBasedExtraMinutes) >= _now 
                              && currentEvent.TimeTo >= _now)
                     {
                         ventilationPhase = VentilationPhase.RunOut;
@@ -97,6 +86,29 @@ namespace SmartVentilation.ConsoleApp.Jobs
             }
 
             logger.Info($"Ventilace nastavena na fázi {ventilationPhase.ToString().ToUpper()}");
+        }
+
+        private List<ScheduledEvent> GetCurrentEvents(int temperatureBasedExtraMinutes)
+        {
+            var scheduledEventsJson = File.ReadAllText(_applicationConfig.EventsFilePath);
+            var currentEvents = JsonConvert.DeserializeObject<List<ScheduledEvent>>(scheduledEventsJson)
+                .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes - temperatureBasedExtraMinutes) <= _now
+                            && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes + temperatureBasedExtraMinutes) >= _now).ToList();
+            
+            logger.Info($"Právě probíhající události:");
+            foreach (var currentEvent in currentEvents)
+            {
+                logger.Info($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
+            }
+
+            return currentEvents;
+        }
+
+        private async Task<int> GetTemperatureBasedExtraMinutes()
+        {
+            var temperatureService = new TemperatureService();
+
+            return await temperatureService.GetTemperatureBasedExtraMinutes();
         }
     }
 }

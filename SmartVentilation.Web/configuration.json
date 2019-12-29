@@ -40,5 +40,8 @@
     }
   ],
   "OpenWeatherApiKey": "40acd75d3ee030b951192ea6ca708089",
-  "OpenWeatherApiPlace": "Pardubice"
+  "OpenWeatherApiPlace": "Pardubice",
+  "LowTemperatureMinutes": 0,
+  "MiddleTemperatureMinutes": 5,
+  "HighTemperatureMinutes": 10
 }

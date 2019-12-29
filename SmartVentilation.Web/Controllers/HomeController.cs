@@ -78,12 +78,6 @@ namespace SmartVentilation.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private static DateTime ConvertFromUnixTimestamp(double timestamp)
-        {
-            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return origin.AddSeconds(timestamp);
-        }
-
         // TODO přemísunout ven z kontroleru
         private static void AddStartUpAndRunOut(List<CalendarEvent> calendarEventList, ScheduledEvent scheduledEvent)
         {
