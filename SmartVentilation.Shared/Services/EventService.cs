@@ -11,11 +11,18 @@ namespace SmartVentilation.Shared.Services
     {
         public async Task<List<ScheduledEvent>> GetScheduledEvents(string eventsFilePath, DateTime fromDate, DateTime toDate)
         {
-            var eventsJson = await System.IO.File.ReadAllTextAsync(eventsFilePath);
-            var eventList = JsonConvert.DeserializeObject<List<ScheduledEvent>>(eventsJson);
-            eventList = eventList.Where(x => x.TimeFrom >= fromDate && x.TimeFrom < toDate).ToList();
+            try
+            {
+                var eventsJson = await System.IO.File.ReadAllTextAsync(eventsFilePath);
+                var eventList = JsonConvert.DeserializeObject<List<ScheduledEvent>>(eventsJson);
+                eventList = eventList.Where(x => x.TimeFrom >= fromDate && x.TimeFrom < toDate).ToList();
 
-            return eventList;
+                return eventList;
+            }
+            catch (Exception e)
+            {
+                return new List<ScheduledEvent>();
+            }
         }
     }
 }

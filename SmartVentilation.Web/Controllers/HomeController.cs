@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -39,8 +38,15 @@ namespace SmartVentilation.Web.Controllers
 
             if (viewDate.Date == DateTime.Now.Date)
             {
-                var json =  System.IO.File.ReadAllText(_applicationConfig.TemperatureFilePath);;
-                model.Temperature = JsonConvert.DeserializeObject<int>(json);
+                try
+                {
+                    var json = System.IO.File.ReadAllText(_applicationConfig.TemperatureFilePath);;
+                    model.Temperature = JsonConvert.DeserializeObject<int>(json);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e.Message);
+                }
             }
             else
             {

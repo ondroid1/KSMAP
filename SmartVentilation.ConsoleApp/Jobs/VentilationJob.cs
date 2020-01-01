@@ -90,18 +90,26 @@ namespace SmartVentilation.ConsoleApp.Jobs
 
         private List<ScheduledEvent> GetCurrentEvents(int temperatureBasedExtraMinutes)
         {
-            var scheduledEventsJson = File.ReadAllText(_applicationConfig.EventsFilePath);
-            var currentEvents = JsonConvert.DeserializeObject<List<ScheduledEvent>>(scheduledEventsJson)
-                .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes - temperatureBasedExtraMinutes) <= _now
-                            && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes + temperatureBasedExtraMinutes) >= _now).ToList();
-            
-            logger.Info($"Právě probíhající události:");
-            foreach (var currentEvent in currentEvents)
+            try
             {
-                logger.Info($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
-            }
+                var scheduledEventsJson = File.ReadAllText(_applicationConfig.EventsFilePath);
+                var currentEvents = JsonConvert.DeserializeObject<List<ScheduledEvent>>(scheduledEventsJson)
+                    .Where(x => x.TimeFrom.AddMinutes(- x.EventType.VentilationStartUpInMinutes - temperatureBasedExtraMinutes) <= _now
+                                && x.TimeTo.AddMinutes(x.EventType.VentilationRunOutInMinutes + temperatureBasedExtraMinutes) >= _now).ToList();
+            
+                logger.Info($"Právě probíhající události:");
+                foreach (var currentEvent in currentEvents)
+                {
+                    logger.Info($"{currentEvent.EventType.Code} - {currentEvent.TimeFrom}");
+                }
 
-            return currentEvents;
+                return currentEvents;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e);
+                return new List<ScheduledEvent>();
+            }
         }
 
         private async Task<int> GetTemperatureBasedExtraMinutes()
