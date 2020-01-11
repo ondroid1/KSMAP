@@ -43,10 +43,13 @@
             axisFormat: 'H:mm',
             timeFormat: 'H:mm',
             nowIndicator: true,
-            now: '@DateTime.Now.ToString("s")',
+            now: '@Model.ViewDate.ToString("s")',
             editable: false,
             events: "/Home/GetEvents?date=@Context.Request.Query["date"]",
-            //eventColor: '#378006'
+            //visibleRange: {
+            //    start: '2020-03-22',
+            //    end: '2020-03-25'
+            //}
         });
     });
 </script>

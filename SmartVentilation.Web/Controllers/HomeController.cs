@@ -40,7 +40,7 @@ namespace SmartVentilation.Web.Controllers
             {
                 try
                 {
-                    var json = System.IO.File.ReadAllText(_applicationConfig.TemperatureFilePath);;
+                    var json = System.IO.File.ReadAllText(_applicationConfig.TemperatureFilePath);
                     model.Temperature = JsonConvert.DeserializeObject<int>(json);
                 }
                 catch (Exception e)
